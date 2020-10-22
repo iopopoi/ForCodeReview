@@ -24,10 +24,15 @@ public class Video {
 
 	public int getLateReturnPointPenalty() {
 		int pentalty = 0 ;
-		switch ( videoType ) {
-			case VHS: pentalty = 1 ; break ;
-			case CD: pentalty = 2 ; break ;
-			case DVD: pentalty = 3 ; break ;
+
+		if(videoType==VHS){
+			pentalty = 1 ;
+		}
+		else if( videoType = CD){
+			pentalty = 2;
+		}
+		else if(videoType=3){
+			pentalty = 3;
 		}
 		return pentalty ;
 	}
