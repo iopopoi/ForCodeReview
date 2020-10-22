@@ -46,15 +46,19 @@ public class Rental {
 		this.returnDate = returnDate;
 	}
 
+	public int diffcal(long in) {
+		return (int) (in / (1000 * 60 * 60 * 24)) + 1;
+	}
+
 	public int getDaysRentedLimit() {
 		int limit = 0 ;
 		int daysRented ;
 		if (getStatus() == 1) { // returned Video
 			long diff = returnDate.getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+			daysRented = diffcal(diff);
 		} else { // not yet returned
 			long diff = new Date().getTime() - rentDate.getTime();
-			daysRented = (int) (diff / (1000 * 60 * 60 * 24)) + 1;
+			daysRented = diffcal(diff);
 		}
 		if ( daysRented <= 2) return limit ;
 
