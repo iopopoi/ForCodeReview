@@ -42,7 +42,7 @@ public class Customer {
 
 		for (Rental each : rentals) {
 			double eachCharge = 0;
-			int eachPoint = 0 ;
+			int eachPoint = 0;
 			int daysRented = 0;
 
 			if (each.getStatus() == 1) { // returned Video
@@ -54,41 +54,40 @@ public class Customer {
 			}
 
 			switch (each.getVideo().getPriceCode()) {
-			case Video.REGULAR:
-				eachCharge += 2;
-				if (daysRented > 2)
-					eachCharge += (daysRented - 2) * 1.5;
-				break;
-			case Video.NEW_RELEASE:
-				eachCharge = daysRented * 3;
-				break;
+				case Video.REGULAR:
+					eachCharge += 2;
+					if (daysRented > 2)
+						eachCharge += (daysRented - 2) * 1.5;
+					break;
+				case Video.NEW_RELEASE:
+					eachCharge = daysRented * 3;
+					break;
 			}
 
 			eachPoint++;
-			
-			if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE) )
+
+			if ((each.getVideo().getPriceCode() == Video.NEW_RELEASE))
 				eachPoint++;
-			
-			if ( daysRented > each.getDaysRentedLimit() )
-				eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty()) ;
-			
+
+			if (daysRented > each.getDaysRentedLimit())
+				eachPoint -= Math.min(eachPoint, each.getVideo().getLateReturnPointPenalty());
+
 			result += "\t" + each.getVideo().getTitle() + "\tDays rented: " + daysRented + "\tCharge: " + eachCharge
 					+ "\tPoint: " + eachPoint + "\n";
 
 			totalCharge += eachCharge;
-			
-			totalPoint += eachPoint ;
+
+			totalPoint += eachPoint;
 		}
 
 		result += "Total charge: " + totalCharge + "\tTotal Point:" + totalPoint + "\n";
-		
-		
-		if ( totalPoint >= 10 ) {
+
+		if (totalPoint >= 10) {
 			System.out.println("Congrat! You earned one free coupon");
 		}
-		if ( totalPoint >= 30 ) {
+		if (totalPoint >= 30) {
 			System.out.println("Congrat! You earned two free coupon");
 		}
-		return result ;
+		return result;
 	}
 }
